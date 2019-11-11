@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Basic Line - Vue Mix</title>
+
+  <link href="../../assets/styles.css" rel="stylesheet" />
+
+  <style>
+    body{
+      background: #444;
+    }
+    #chart {
+      max-width: 650px;
+      margin: 35px auto;
+      padding: 15px 10px;
+      background: #444;
+      border: 1px solid #ddd;
+    }
+    #chart1, #chart2 {
+      max-width: 650px;
+      margin: 35px auto;
+    }
+
+     #chart2 {
+      position: relative;
+      margin-top: -70px;
+      margin-bottom: 0px;
+    }
+
+    #app {
+      max-width: 650px;
+      padding: 15px 10px;
+      background: #444;
+      border: 1px solid #ddd;
+      box-shadow: 0 22px 35px -16px rgba(0, 0, 0, 0.1);
+      margin: 35px auto;
+    }
+    .flex{
+      display: flex;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="flex">
+    <div id="chart">
+      <apexchart type=line height=350 :options="chartOptions" :series="series" />
+    </div>
+
+    <div id="app">
+      <div id="chart1">
+        <apexchart type=line height=230 :options="chartOptionsArea" :series="series" />
+      </div>
+      <div id="chart2">
+        <apexchart type=area height=130 :options="chartOptionsBrush" :series="series" />
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-apexcharts"></script>
+
+  <script>
+    new Vue({
+      el: '#chart',
+      components: {
+        apexchart: VueApexCharts,
+      },
+      data: {
+        series: [{
+          name: "Desktops",
+          data: [10, 41, 35, 51, 12, 62, 69, 90, 70, 120, 148]
+        }],
+        chartOptions: {
+          chart: {
+            height: 350,
+            zoom: {
+              enabled: false
+            }
+          },
+          dataLabels: {
+            enabled: true
+          },
+          stroke: {
+            curve: 'straight'
+          },
+          title: {
+            text: 'Product Trends by Month',
+            align: 'left'
+          },
+          grid: {
+            row: {
+              colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+              opacity: 0.5
+            },
+          },
+          xaxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+          },
+          theme: {
+            mode: 'dark',
+            palette: 'palette1',
+            monochrome: {
+              enabled: false,
+              color: '#255aee',
+              shadeTo: 'light',
+              shadeIntensity: 0.65
+            },
+          }
+
+        }
+      },
+
+    })
+
+    //
+  </script>
+
+  <script src="js/line-brush.js"></script>
+
+</body>
+
+</html>
